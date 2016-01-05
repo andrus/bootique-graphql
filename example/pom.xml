@@ -16,6 +16,10 @@
 	</description>
 	<packaging>jar</packaging>
 
+	<properties>
+		<main.class>org.objectstyle.graphql.example.Main</main.class>
+	</properties>
+
 	<dependencies>
 		<!-- GraphQL engine -->
 		<dependency>
@@ -41,6 +45,19 @@
 			<version>0.7</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+	<plugins>
+	<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+        </plugin>
+	</plugins>
+	</build>
 
 	<!-- Optional profile used to sign artifacts -->
 	<profiles>
