@@ -1,5 +1,8 @@
 package org.objectstyle.bootique.graphql;
 
+import javax.ws.rs.core.Feature;
+import javax.ws.rs.core.FeatureContext;
+
 import org.apache.cayenne.configuration.server.ServerRuntime;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.objectstyle.bootique.graphql.jaxrs.GraphQLResource;
@@ -25,10 +28,9 @@ public class GraphQLModule extends ConfigModule {
 	public void configure(Binder binder) {
 		binder.bind(SchemaTranslator.class).to(DefaultSchemaTranslator.class).in(Singleton.class);
 
-		JerseyBinder.contributeTo(binder).features(fc -> {
-			fc.register(GraphQLResource.class);
-			return true;
-		});
+		// TODO: can do away with lambda instead of a class after
+		// https://github.com/nhl/bootique-jersey/issues/5 is fixed
+		JerseyBinder.contributeTo(binder).features(GraphQLFeature.class);
 	}
 
 	@Provides
@@ -54,5 +56,13 @@ public class GraphQLModule extends ConfigModule {
 	private MappedServlet createJerseyServlet(ConfigurationFactory configFactory, ResourceConfig config) {
 		return configFactory.config(JerseyServletFactory.class, configPrefix).initServletPathIfNotSet("/graphql/*")
 				.createJerseyServlet(config);
+	}
+
+	static class GraphQLFeature implements Feature {
+		@Override
+		public boolean configure(FeatureContext context) {
+			context.register(GraphQLResource.class);
+			return true;
+		}
 	}
 }
