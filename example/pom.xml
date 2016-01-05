@@ -26,9 +26,10 @@
 		<!-- GraphiQL UI -->
 		<dependency>
 			<groupId>org.objectstyle.bootique.graphql</groupId>
-			<artifactId>bootique-graphql</artifactId>
+			<artifactId>bootique-graphiql</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- Other stuff that we need.. -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
