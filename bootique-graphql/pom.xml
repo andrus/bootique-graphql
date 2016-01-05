@@ -23,6 +23,11 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.nhl.bootique</groupId>
+			<artifactId>bootique</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.nhl.bootique.cayenne</groupId>
 			<artifactId>bootique-cayenne</artifactId>
 			<scope>compile</scope>

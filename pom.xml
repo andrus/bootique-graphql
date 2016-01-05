@@ -21,8 +21,9 @@
 
 		<!-- Custom properties (mostly framework versions) -->
 		<slf4j-version>1.7.12</slf4j-version>
+		<bootique-version>0.11</bootique-version>
 		<bootique-jetty-version>0.10</bootique-jetty-version>
-		<bootique-jersey-version>0.10</bootique-jersey-version>
+		<bootique-jersey-version>0.11-SNAPSHOT</bootique-jersey-version>
 		<bootique-cayenne-version>0.10</bootique-cayenne-version>
 	</properties>
 
@@ -73,6 +74,11 @@
 				<groupId>com.graphql-java</groupId>
 				<artifactId>graphql-java</artifactId>
 				<version>1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.nhl.bootique</groupId>
+				<artifactId>bootique</artifactId>
+				<version>${bootique-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.nhl.bootique.jersey</groupId>
