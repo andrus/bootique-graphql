@@ -6,6 +6,11 @@ import javax.ws.rs.core.FeatureContext;
 import org.apache.cayenne.configuration.server.ServerRuntime;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.objectstyle.bootique.graphql.jaxrs.GraphQLResource;
+import org.objectstyle.bootique.graphql.jaxrs.provider.ExecutionResultWriter;
+import org.objectstyle.bootique.graphql.jaxrs.provider.GraphiQLRestQueryReader;
+import org.objectstyle.bootique.graphql.json.JacksonReaderWriter;
+import org.objectstyle.bootique.graphql.json.JsonReader;
+import org.objectstyle.bootique.graphql.json.JsonWriter;
 import org.objectstyle.bootique.graphql.orm.DefaultSchemaTranslator;
 import org.objectstyle.bootique.graphql.orm.SchemaTranslator;
 
@@ -26,6 +31,11 @@ public class GraphQLModule extends ConfigModule {
 
 	@Override
 	public void configure(Binder binder) {
+
+		binder.bind(JacksonReaderWriter.class).in(Singleton.class);
+		binder.bind(JsonReader.class).to(JacksonReaderWriter.class);
+		binder.bind(JsonWriter.class).to(JacksonReaderWriter.class);
+
 		binder.bind(SchemaTranslator.class).to(DefaultSchemaTranslator.class).in(Singleton.class);
 
 		// TODO: can do away with lambda instead of a class after
@@ -61,6 +71,8 @@ public class GraphQLModule extends ConfigModule {
 	static class GraphQLFeature implements Feature {
 		@Override
 		public boolean configure(FeatureContext context) {
+			context.register(GraphiQLRestQueryReader.class);
+			context.register(ExecutionResultWriter.class);
 			context.register(GraphQLResource.class);
 			return true;
 		}

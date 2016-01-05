@@ -12,12 +12,9 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonGenerator.Feature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import org.objectstyle.bootique.graphql.json.JsonWriter;
+
+import com.google.inject.Inject;
 
 import graphql.ExecutionResult;
 
@@ -25,22 +22,8 @@ import graphql.ExecutionResult;
 @Singleton
 public class ExecutionResultWriter implements MessageBodyWriter<ExecutionResult> {
 
-	private JsonFactory jsonFactory;
-
-	public ExecutionResultWriter() {
-
-		ObjectMapper jsonMapper = new ObjectMapper();
-
-		this.jsonFactory = jsonMapper.getFactory();
-
-		// make sure mapper does not attempt closing streams it does not
-		// manage... why is this even a default in jackson?
-		jsonFactory.disable(Feature.AUTO_CLOSE_TARGET);
-
-		// do not flush every time. why would we want to do that?
-		// this is having a HUGE impact on performance
-		jsonMapper.disable(SerializationFeature.FLUSH_AFTER_WRITE_VALUE);
-	}
+	@Inject
+	private JsonWriter writer;
 
 	@Override
 	public long getSize(ExecutionResult t, Class<?> type, Type genericType, Annotation[] annotations,
@@ -58,7 +41,8 @@ public class ExecutionResultWriter implements MessageBodyWriter<ExecutionResult>
 			MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
 					throws IOException, WebApplicationException {
 
-		try (JsonGenerator generator = jsonFactory.createGenerator(entityStream, JsonEncoding.UTF8)) {
+		writer.write(entityStream, generator -> {
+
 			generator.writeStartObject();
 
 			// TODO: is it ok to rely on default serialization of data and
@@ -73,6 +57,7 @@ public class ExecutionResultWriter implements MessageBodyWriter<ExecutionResult>
 			}
 
 			generator.writeEndObject();
-		}
+
+		});
 	}
 }
