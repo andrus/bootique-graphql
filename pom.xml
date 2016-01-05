@@ -23,7 +23,7 @@
 		<slf4j-version>1.7.12</slf4j-version>
 		<bootique-jetty-version>0.10</bootique-jetty-version>
 		<bootique-jersey-version>0.10</bootique-jersey-version>
-		<bootique-graphiql-version>0.1-SNAPSHOT</bootique-graphiql-version>
+		<bootique-cayenne-version>0.10</bootique-cayenne-version>
 	</properties>
 
 	<modules>
@@ -69,43 +69,41 @@
 
 	<dependencyManagement>
 		<dependencies>
-
 			<dependency>
-				<groupId>org.objectstyle.bootique.graphiql</groupId>
-				<artifactId>bootique-graphiql</artifactId>
-				<version>${bootique-graphiql-version}</version>
+				<groupId>com.graphql-java</groupId>
+				<artifactId>graphql-java</artifactId>
+				<version>1.3</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.nhl.bootique.jersey</groupId>
 				<artifactId>bootique-jersey</artifactId>
 				<version>${bootique-jersey-version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.nhl.bootique.jetty</groupId>
 				<artifactId>bootique-jetty</artifactId>
 				<version>${bootique-jetty-version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.nhl.bootique.cayenne</groupId>
+				<artifactId>bootique-cayenne</artifactId>
+				<version>${bootique-cayenne-version}</version>
+			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
 				<version>1.9.5-rc1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j-version}</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 

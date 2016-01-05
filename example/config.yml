@@ -1,0 +1,13 @@
+jdbc:
+  graphql:
+    url: "jdbc:mysql://192.168.59.103/graphql?connectTimeout=0&autoReconnect=true&characterEncoding=UTF-8"
+    username: root
+    password: root
+    initialSize: 1
+    minIdle: 1
+    maxIdle: 2
+    maxActive: 10
+
+# Cayenne config
+cayenne:
+  datasource: graphql
