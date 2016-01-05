@@ -28,7 +28,7 @@
 
 	<modules>
 		<module>bootique-graphiql</module>
-		<module>bootique-graphql-orm</module>
+		<module>bootique-graphql</module>
 		<module>example</module>
 	</modules>
 

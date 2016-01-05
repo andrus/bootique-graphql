@@ -9,10 +9,10 @@
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bootique-graphql-orm</artifactId>
+	<artifactId>bootique-graphql</artifactId>
 
-	<name>GraphQL ORM Engine</name>
-	<description>A Java server framework that provides a GraphQL support for relational databases. GraphQL engine is exposed via a REST endpoint. The framework is intended for embedding in user applications. The easiest way to do it is via Bootique engine.
+	<name>GraphQL Engine on Bootique</name>
+	<description>A Java server framework that provides a GraphQL support for relational databases over REST. The framework is intended for embedding in user applications. The easiest way to do it is via Bootique engine.
 	</description>
 	<packaging>jar</packaging>
 
