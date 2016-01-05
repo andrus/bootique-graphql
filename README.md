@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andrus/bootique-graphql-orm.svg?branch=master)](https://travis-ci.org/andrus/bootique-graphql-orm)
+[![Build Status](https://travis-ci.org/andrus/bootique-graphql.svg?branch=master)](https://travis-ci.org/andrus/bootique-graphql)
 
 A Java framework for building [GraphQL](https://facebook.github.io/graphql/) servers. Main features:
 
