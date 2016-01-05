@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.objectstyle.bootique.graphql</groupId>
+	<artifactId>bootique-graphql-parent</artifactId>
+	<version>0.1-SNAPSHOT</version>
+
+	<name>GraphQL Java Server Framework</name>
+	<description>A parent pom for a set of modules for building a GraphQL Java Server on top of Bootique.</description>
+	<packaging>pom</packaging>
+
+	<properties>
+
+		<!-- standard Maven properties -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Custom properties (mostly framework versions) -->
+		<slf4j-version>1.7.12</slf4j-version>
+		<bootique-jersey-version>0.10</bootique-jersey-version>
+		<bootique-graphiql-version>0.1-SNAPSHOT</bootique-graphiql-version>
+	</properties>
+
+	<modules>
+		<module>bootique-graphiql</module>
+		<module>bootique-graphql-orm</module>
+		<module>example</module>
+	</modules>
+
+	<url>https://github.com/andrus/bootique-graphql-orm</url>
+
+	<licenses>
+		<license>
+			<name>Apache 2.0 License</name>
+			<url>https://github.com/bootique-graphql-orm/blob/master/LICENSE.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>andrus</id>
+			<name>Andrus Adamchik</name>
+			<email>andrus@objectstyle.com</email>
+			<organization>ObjectStyle</organization>
+			<timezone>America/New_York</timezone>
+		</developer>
+	</developers>
+
+	<scm>
+		<developerConnection>scm:git:ssh://git@github.com/andrus/bootique-graphql-orm</developerConnection>
+		<url>https://github.com/andrus/bootique-graphql-orm</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>oss-sonatype-releases</id>
+			<name>Deployment Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.objectstyle.bootique.graphiql</groupId>
+				<artifactId>bootique-graphiql</artifactId>
+				<version>${bootique-graphiql-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.nhl.bootique.jersey</groupId>
+				<artifactId>bootique-jersey</artifactId>
+				<version>${bootique-jersey-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>1.9.5-rc1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j-version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.9.1</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.1</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<!-- Older versions of release plugin do not work with Git properly -->
+					<version>2.5.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.19</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Optional profile used to sign artifacts -->
+	<profiles>
+		<profile>
+			<id>gpg</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
