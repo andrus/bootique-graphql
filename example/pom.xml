@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.objectstyle.bootique.graphqlorm</groupId>
-		<artifactId>bootique-graphql-orm-parent</artifactId>
+		<groupId>org.objectstyle.bootique.graphql</groupId>
+		<artifactId>bootique-graphql-parent</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
