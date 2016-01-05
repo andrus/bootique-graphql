@@ -1,13 +1,8 @@
 package org.objectstyle.bootique.graphql;
 
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
-
 import org.apache.cayenne.configuration.server.ServerRuntime;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.objectstyle.bootique.graphql.jaxrs.GraphQLResource;
-import org.objectstyle.bootique.graphql.jaxrs.provider.ExecutionResultWriter;
-import org.objectstyle.bootique.graphql.jaxrs.provider.GraphiQLRestQueryReader;
+import org.objectstyle.bootique.graphql.jaxrs.GraphQLFeature;
 import org.objectstyle.bootique.graphql.json.JacksonReaderWriter;
 import org.objectstyle.bootique.graphql.json.JsonReader;
 import org.objectstyle.bootique.graphql.json.JsonWriter;
@@ -38,8 +33,6 @@ public class GraphQLModule extends ConfigModule {
 
 		binder.bind(SchemaTranslator.class).to(DefaultSchemaTranslator.class).in(Singleton.class);
 
-		// TODO: can do away with lambda instead of a class after
-		// https://github.com/nhl/bootique-jersey/issues/5 is fixed
 		JerseyBinder.contributeTo(binder).features(GraphQLFeature.class);
 	}
 
@@ -66,15 +59,5 @@ public class GraphQLModule extends ConfigModule {
 	private MappedServlet createJerseyServlet(ConfigurationFactory configFactory, ResourceConfig config) {
 		return configFactory.config(JerseyServletFactory.class, configPrefix).initServletPathIfNotSet("/graphql/*")
 				.createJerseyServlet(config);
-	}
-
-	static class GraphQLFeature implements Feature {
-		@Override
-		public boolean configure(FeatureContext context) {
-			context.register(GraphiQLRestQueryReader.class);
-			context.register(ExecutionResultWriter.class);
-			context.register(GraphQLResource.class);
-			return true;
-		}
 	}
 }

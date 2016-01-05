@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
 
-import org.objectstyle.bootique.graphql.BQGraphQLException;
+import javax.ws.rs.core.Response.Status;
+
+import org.objectstyle.bootique.graphql.BQGraphQLRestException;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -44,7 +46,7 @@ public class JacksonReaderWriter implements JsonReader, JsonWriter {
 			com.fasterxml.jackson.core.JsonParser parser = sharedFactory.createParser(jsonStream);
 			return new ObjectMapper().readTree(parser);
 		} catch (IOException e) {
-			throw new BQGraphQLException("Error parsing JSON", e);
+			throw new BQGraphQLRestException(Status.BAD_REQUEST, "Error parsing JSON", e);
 		}
 	}
 
@@ -54,7 +56,7 @@ public class JacksonReaderWriter implements JsonReader, JsonWriter {
 		try {
 			return new ObjectMapper().readValue(new TreeTraversingParser(jsonNode), type);
 		} catch (IOException e) {
-			throw new BQGraphQLException("Error mapping JSON to object", e);
+			throw new BQGraphQLRestException(Status.BAD_REQUEST, "Error mapping JSON to object", e);
 		}
 	}
 
@@ -64,7 +66,7 @@ public class JacksonReaderWriter implements JsonReader, JsonWriter {
 		try (JsonGenerator generator = sharedFactory.createGenerator(out, JsonEncoding.UTF8)) {
 			delegate.write(generator);
 		} catch (IOException e) {
-			throw new BQGraphQLException("Error writing JSON", e);
+			throw new BQGraphQLRestException(Status.INTERNAL_SERVER_ERROR, "Error writing JSON", e);
 		}
 	}
 
