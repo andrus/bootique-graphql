@@ -17,6 +17,18 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
+		<!-- GraphQL engine -->
+		<dependency>
+			<groupId>org.objectstyle.bootique.graphql</groupId>
+			<artifactId>bootique-graphql</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- GraphiQL UI -->
+		<dependency>
+			<groupId>org.objectstyle.bootique.graphql</groupId>
+			<artifactId>bootique-graphql</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

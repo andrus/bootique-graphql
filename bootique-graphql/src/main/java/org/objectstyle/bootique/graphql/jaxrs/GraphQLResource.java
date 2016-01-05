@@ -16,6 +16,9 @@ import graphql.GraphQLError;
 import graphql.InvalidSyntaxError;
 import graphql.language.SourceLocation;
 
+/**
+ * A REST resource exposing a GraphQL engine.
+ */
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class GraphQLResource {
