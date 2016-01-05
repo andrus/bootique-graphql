@@ -26,19 +26,15 @@ public class GraphQLResource {
 	@Inject
 	private GraphQL graphql;
 
-	@POST
-	public ExecutionResult post(String query) {
-		return process(query);
-	}
-
 	// TODO: variables
-	protected ExecutionResult process(String query) {
+	@POST
+	public ExecutionResult post(GraphiQLRestQuery queryHolder) {
 
-		if (query == null) {
+		if (queryHolder == null || queryHolder.getQuery() == null) {
 			GraphQLError error = new InvalidSyntaxError(new SourceLocation(0, 0));
 			return new ExecutionResultImpl(Collections.singletonList(error));
 		}
 
-		return graphql.execute(query);
+		return graphql.execute(queryHolder.getQuery());
 	}
 }

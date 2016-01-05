@@ -1,4 +1,4 @@
-package org.objectstyle.bootique.graphql.jaxrs;
+package org.objectstyle.bootique.graphql.jaxrs.provider;
 
 import java.io.IOException;
 import java.io.OutputStream;
