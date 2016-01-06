@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import org.objectstyle.bootique.graphql.BQGraphQLRestException;
+import org.objectstyle.bootique.graphql.jaxrs.BQGraphQLRestException;
 import org.objectstyle.bootique.graphql.jaxrs.MessageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

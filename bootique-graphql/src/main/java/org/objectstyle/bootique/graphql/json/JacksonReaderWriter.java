@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import javax.ws.rs.core.Response.Status;
 
-import org.objectstyle.bootique.graphql.BQGraphQLRestException;
+import org.objectstyle.bootique.graphql.jaxrs.BQGraphQLRestException;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;

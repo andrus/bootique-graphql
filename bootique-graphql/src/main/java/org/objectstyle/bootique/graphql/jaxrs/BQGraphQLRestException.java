@@ -1,4 +1,4 @@
-package org.objectstyle.bootique.graphql;
+package org.objectstyle.bootique.graphql.jaxrs;
 
 import javax.ws.rs.core.Response.Status;
 
