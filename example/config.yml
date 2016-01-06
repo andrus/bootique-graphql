@@ -8,6 +8,6 @@ jdbc:
     maxIdle: 2
     maxActive: 10
 
-# Cayenne config
 cayenne:
   datasource: graphql
+  createSchema: true
