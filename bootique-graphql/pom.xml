@@ -16,6 +16,34 @@
 	</description>
 	<packaging>jar</packaging>
 
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<!-- needed to get latest graphql-java builds -->
+		<repository>
+			<id>graphql-java</id>
+			<url>http://dl.bintray.com/andimarek/graphql-java</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.graphql-java</groupId>
+				<artifactId>graphql-java</artifactId>
+				<version>2016-01-02T08-49-39</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.graphql-java</groupId>
