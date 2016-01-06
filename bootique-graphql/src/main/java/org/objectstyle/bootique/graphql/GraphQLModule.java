@@ -31,8 +31,6 @@ public class GraphQLModule extends ConfigModule {
 		binder.bind(JsonReader.class).to(JacksonReaderWriter.class);
 		binder.bind(JsonWriter.class).to(JacksonReaderWriter.class);
 
-		binder.bind(SchemaTranslator.class).to(DefaultSchemaTranslator.class).in(Singleton.class);
-
 		JerseyBinder.contributeTo(binder).features(GraphQLFeature.class);
 	}
 
@@ -60,4 +58,11 @@ public class GraphQLModule extends ConfigModule {
 		return configFactory.config(JerseyServletFactory.class, configPrefix).initServletPathIfNotSet("/graphql/*")
 				.createJerseyServlet(config);
 	}
+
+	@Provides
+	@Singleton
+	SchemaTranslator createSchemaTranslator(ServerRuntime cayenneRuntime) {
+		return new DefaultSchemaTranslator(cayenneRuntime.newContext());
+	}
+
 }

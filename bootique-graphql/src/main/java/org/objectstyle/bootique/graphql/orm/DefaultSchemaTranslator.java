@@ -7,9 +7,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.map.EntityResolver;
 
 import graphql.Scalars;
+import graphql.schema.DataFetcher;
 import graphql.schema.GraphQLArgument;
 import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLList;
@@ -21,9 +23,12 @@ import graphql.schema.GraphQLSchema.Builder;
 public class DefaultSchemaTranslator implements SchemaTranslator {
 
 	private ConcurrentMap<Class<?>, GraphQLOutputType> typeCache;
+	private ObjectContext selectContext;
 
-	public DefaultSchemaTranslator() {
-		typeCache = new ConcurrentHashMap<>();
+	public DefaultSchemaTranslator(ObjectContext selectContext) {
+		this.selectContext = selectContext;
+
+		this.typeCache = new ConcurrentHashMap<>();
 		typeCache.put(Boolean.class, Scalars.GraphQLBoolean);
 
 		typeCache.put(String.class, Scalars.GraphQLString);
@@ -71,8 +76,10 @@ public class DefaultSchemaTranslator implements SchemaTranslator {
 			String fetchAllName = "all" + t.getName() + "s";
 			GraphQLList type = new GraphQLList(t);
 
+			DataFetcher listFetcher = new ListDataFetcher(t.getName(), selectContext);
+
 			GraphQLFieldDefinition f = GraphQLFieldDefinition.newFieldDefinition().name(fetchAllName).type(type)
-					.build();
+					.dataFetcher(listFetcher).build();
 
 			typeBuilder.field(f);
 		});

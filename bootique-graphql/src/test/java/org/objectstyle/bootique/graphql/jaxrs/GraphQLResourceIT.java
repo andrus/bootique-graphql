@@ -19,4 +19,17 @@ public class GraphQLResourceIT extends GraphQLJerseyTestOnDerby {
 		String json = r.readEntity(String.class);
 		assertTrue(json, json.startsWith("{\"data\":{\"__schema\":{\"types\":[{\"name\":"));
 	}
+	
+	@Test
+	public void testDataQuery() {
+		
+		insert("e1", "id, name", "1, 'a'");
+		insert("e1", "id, name", "2, 'b'");
+		
+		Response r = postGraphQL("{ allE1s { name }}");
+		assertEquals(Status.OK.getStatusCode(), r.getStatus());
+
+		String json = r.readEntity(String.class);
+		assertTrue(json, json.startsWith("{\"data\":{\"allE1s\":[{\"name\":"));
+	}
 }
