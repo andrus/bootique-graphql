@@ -38,7 +38,7 @@ public class GraphQLModule extends ConfigModule {
 
 	@Provides
 	@Singleton
-	public GraphQL createGraphQL(ServerRuntime cayenneRuntime, SchemaTranslator translator) {
+	GraphQL createGraphQL(ServerRuntime cayenneRuntime, SchemaTranslator translator) {
 		GraphQLSchema schema = translator.toGraphQL(cayenneRuntime.getChannel().getEntityResolver());
 		return new GraphQL(schema);
 	}
@@ -56,7 +56,7 @@ public class GraphQLModule extends ConfigModule {
 	@JerseyServlet
 	@Provides
 	@Singleton
-	private MappedServlet createJerseyServlet(ConfigurationFactory configFactory, ResourceConfig config) {
+	MappedServlet createJerseyServlet(ConfigurationFactory configFactory, ResourceConfig config) {
 		return configFactory.config(JerseyServletFactory.class, configPrefix).initServletPathIfNotSet("/graphql/*")
 				.createJerseyServlet(config);
 	}
