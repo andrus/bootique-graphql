@@ -24,7 +24,7 @@ public class GraphQLResource {
 	private GraphQL graphql;
 
 	@POST
-	public ExecutionResult execute(GraphiQLRestQuery queryHolder) {
+	public ExecutionResult execute(GraphQLRestQuery queryHolder) {
 
 		if (queryHolder == null || queryHolder.getQuery() == null) {
 			throw new BQGraphQLRestException(Status.BAD_REQUEST, "No query");

@@ -1,9 +1,9 @@
 package org.objectstyle.bootique.graphql.jaxrs;
 
 /**
- * A value holder object for GraphiQL queries coming via REST API.
+ * A value holder object for GraphQL queries coming from REST API.
  */
-public class GraphiQLRestQuery {
+public class GraphQLRestQuery {
 
 	private String query;
 	private String variables;
